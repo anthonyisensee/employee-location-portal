@@ -1,14 +1,16 @@
 # Employee Location Portal
 
-The main goals of this portal are as follows:
+## Main Goal
 
-* Provide an easy to use interface for employees to register their location as being in or outside of the office.
-* Provide an interface for users with higher permissions to see the status of all employees.
-* Provide a mode for the users with higher permissions to collaboratively account for employees in the case of an emergency.
-* Provide live updates to data via subscriptions so that any connected endpoint always has the most up-to-date data regarding the status of employees.
-* Provide an API that allows other automation to update an employee's location based on data. It should be clarified that only automations that work with certainty should be implemented.
-* Make the application non-dependent on company infrastructure so that in case of an emergency that destroyed that infrastructure the application would still be available.
+Be an effective and easy-to-use tool by which employees may track whether they are in the office or remote on any given day to enhance employee safety in the case of an office emergency.
 
+## Sub-Goals
+
+* Provide an application endpoint for employees to see and modify their own status.
+* Provide an application endpoint for public display and change of status for multiple employees at once.
+* Provide a mode for rapid and collaborative accounting of employees in case of an emergency.
+* Provide realtime data changes to all connected endpoint using subscriptions.
+* Provide API endpoints for a company to implement based on reliable internal company processes that indicate an employee's location.
 
 ## React + TypeScript + Vite
 
