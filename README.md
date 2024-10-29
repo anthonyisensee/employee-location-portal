@@ -26,17 +26,25 @@ Be an effective and easy-to-use tool by which employees may track whether they a
 
 ### Running the Project
 
-#### Start the Project
+#### Starting the Project
 
 1) Open the project files in Visual Studio Code.
 2) Open Docker Desktop, then run `supabase start` in a Linux shell to start the server side component. This may take a while to run the first time as the Supabase Docker images must be retrieved and started.
 3) If it is your first time running the project, run `npm install` in a Linux shell. otherwise, skip this step.
 4) Run `npm run dev` in a Linux shell to launch Vite. Then, click the link generated in the terminal to open the website.
 
-#### Stop the Project
+#### Making Database Changes
 
-1) Terminate vite by escaping process in Linux shell.
-2) If any database changes were made in Supabase run `supabase db diff -f <name_of_change>` to generate a migration file to be committed alongside the code. (It is also wise to run `supabase db reset` to verify that the migration works and does not generate errors.)
+If any database changes in supabase are made during development the following steps should also be taken to track the database changes made alongside the application code. 
+
+1) Run `supabase db diff -f <name_of_change>` to generate a migration file to be committed alongside the code. 
+2) Run `supabase db reset` to verify that the migration works and does not generate errors. Be warned that this will reset any data added manually to the database! If you wish to preserve this data, add it via the seeding file.
+3) Run `supabase gen types --local --schema public > src/types/database.types.ts` to update types associated with the database tables. Make sure this does not introduce any errors to the application!
+
+#### Stopping the Project
+
+1) Terminate Vite by escaping process in Linux shell.
+2) If any database changes were made in Supabase make sure to [make database changes](#making-database-changes) before proceeding.
 3) Terminate supabase by running `supabase stop`.
 
 ### Project Setup
