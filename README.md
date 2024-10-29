@@ -30,7 +30,7 @@ Be an effective and easy-to-use tool by which employees may track whether they a
 
 1) Open the project files in Visual Studio Code.
 2) Open Docker Desktop, then run `supabase start` in a Linux shell to start the server side component. This may take a while to run the first time as the Supabase Docker images must be retrieved and started.
-3) If it is your first time running the project, run `npm install` in the Linux shell. otherwise, skip this step.
+3) If it is your first time running the project, run `npm install` in a Linux shell. otherwise, skip this step.
 4) Run `npm run dev` in a Linux shell to launch Vite. Then, click the link generated in the terminal to open the website.
 
 #### Stop the Project
