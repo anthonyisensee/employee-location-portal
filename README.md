@@ -36,7 +36,8 @@ Be an effective and easy-to-use tool by which employees may track whether they a
 #### Stop the Project
 
 1) Terminate vite by escaping process in Linux shell.
-2) Terminate supabase by running `supabase stop`.
+2) If any database changes were made in Supabase run `supabase db diff -f <name_of_change>` to generate a migration file to be committed alongside the code. (It is also wise to run `supabase db reset` to verify that the migration works and does not generate errors.)
+3) Terminate supabase by running `supabase stop`.
 
 ### Project Setup
 
