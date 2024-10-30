@@ -3,8 +3,9 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import './App.css'
-import { BrowserRouter } from 'react-router-dom'
-import { Container, createTheme, CssBaseline, ThemeProvider, Typography, useMediaQuery } from '@mui/material'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Container, createTheme, CssBaseline, ThemeProvider, useMediaQuery } from '@mui/material'
+import EmployeeDashboard from './components/pages/EmployeeDashboard'
 
 const darkTheme = createTheme({
   colorSchemes: {
@@ -27,9 +28,12 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Container>
-          <Typography variant="h4" component="h1">Employee Location Portal</Typography>
-          <Typography variant="body1">Welcome to the employee location portal application!</Typography>
-        </Container>      
+
+          <Routes>
+            <Route path="/" element={<EmployeeDashboard />} />
+          </Routes>
+
+        </Container>
       </BrowserRouter>
     </ThemeProvider>
   )
