@@ -3,6 +3,11 @@ import { DataGrid } from "@mui/x-data-grid"
 import { supabase } from "../../supabase/supabaseClient"
 import { useState, useEffect } from "react"
 
+const employeeColumns = [
+  { field: "first_name", headerName: "First Name" },
+  { field: "last_name", headerName: "Last Name" },
+]
+
 function EmployeeDashboard() {
 
   const [employees, setEmployees] = useState()
@@ -12,14 +17,14 @@ function EmployeeDashboard() {
   
     async function fetchEmployees() {
       
-      const { data, error } = await 
-      
-      supabase
+      const { data, error } = await supabase
         .from('Employees')
         .select('*')
 
       if (error) console.error(error)
       if (data) setEmployees(data)
+
+      console.log(data)
       
     }
 
@@ -28,18 +33,41 @@ function EmployeeDashboard() {
   }, [])
 
   // Subscribe to changes of data
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   const subscription = supabase
-  //     .from('Employees')
-  //     .on('*', payload => {
-  //       setEmployees(payload.new)
-  //     })
-  //     .subscribe()
+    const channel = supabase
+      .channel('employee-changes')
+      .on('postgres_changes', 
+        { event: "*", schema: "public", table: "Employees" }, 
+        payload => {
+          
+          console.log(payload)
 
-  //   return () => subscription.unsubscribe()
+          switch (payload.eventType) {
+            
+            case "INSERT":
+              setEmployees(prevEmployees => [...prevEmployees, payload.new])
+              break
 
-  // }, [])
+            case "UPDATE":
+              setEmployees(prevEmployees => prevEmployees.map(emp => emp.id === payload.new.id ? payload.new : emp))
+              break
+
+            case "DELETE":
+              setEmployees(prevEmployees => prevEmployees.filter(emp => emp.id !== payload.old.id))
+              break
+            
+            default:
+              break
+            
+          }
+        }
+      )
+      .subscribe()
+
+    return () => supabase.removeChannel(channel)
+
+  }, [])
 
   return (
     <>
@@ -47,7 +75,7 @@ function EmployeeDashboard() {
       <Typography variant="h4" component="h1">Employee Dashboard</Typography>
       <br/>
       <Paper>
-        <DataGrid columns={[]}/>
+        <DataGrid columns={employeeColumns} rows={employees} checkboxSelection/>
       </Paper>
     </>
   )

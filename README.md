@@ -44,7 +44,7 @@ Be an effective and easy-to-use tool by which employees may track whether they a
 If any database changes in supabase are made during development the following steps should also be taken to track the database changes made alongside the application code. 
 
 1) Run `supabase db diff -f <name_of_change>` to generate a migration file to be committed alongside the code. 
-2) Run `supabase db reset` to verify that the migration works and does not generate errors. Be warned that this will reset any data added manually to the database! If you wish to preserve this data, add it via the seeding file.
+2) Run `supabase db reset` to reset and rebuild the database to verify that the migration works and does not generate errors. Be warned that this will reset any data added manually to the database! If you wish to preserve this data, add it via the seed file.
 
 #### Stopping the Project
 
